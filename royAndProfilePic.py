@@ -9,8 +9,6 @@ if (1 <= L <= 10000) and (1 <= N <= 1000):
 else:
     sys.exit()
 
-
-
 while N:
     
     T = raw_input()
