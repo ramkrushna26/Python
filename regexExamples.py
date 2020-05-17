@@ -56,25 +56,34 @@ print("====with regex greedy (zero or more)====")
 isPhone = re.compile(r'Bat(wo)*man')
 print(isPhone.search("Batman"))
 
+
 print("====with regex greedy (zero or more)====")
 isPhone = re.compile(r'Bat(wo)+man')
 print(isPhone.search("Batman"))
 print(isPhone.search("Batwoman"))
+
 
 print("====with regex piping====")
 isPhone = re.compile(r'Bat(bat|mobile|man)')
 mo = isPhone.search("I am Batman")
 print(mo.group())
 
+
 print("====with regex exact match====")
 isPhone = re.compile(r'(Ha){3}')
 print(isPhone.search("He said HaHaHa"))
+
 
 print("====more regex greedy and nongreedy====")
 isDigit = re.compile(r'(\d){3,5}')
 print(isDigit.search("1234567890"))
 isDigit = re.compile(r'(\d){3,5}?')
 print(isDigit.search("1234567890"))
+serve = "<server the diner> on the table."
+greedy = re.compile(r'<(.*)>')
+print(greedy.findall(serve))
+nongreedy = re.compile(r'<(.*?)>')
+print(nongreedy.findall(serve))
 
 
 print("====with findall regex====")
@@ -86,3 +95,36 @@ msg = """12 drummers drumming
 8 maids a milking
 3 French hens"""
 print(isPhone.findall(msg))
+
+
+print("====dot caret dollar====")
+isDigit = re.compile(r'^\d+$')
+print(isDigit.findall("1234567890"))
+isDigit = re.compile(r'First Name: (.*) Last Name: (.*)')
+print(isDigit.findall("First Name: Batman Last Name: Robin"))
+isDigit = re.compile(r'.at')
+print(". means averything except new line")
+print(isDigit.findall("cat wearing hat on a flat sitting on mat."))
+
+
+
+print("====sub method====")
+isName = re.compile(r'Agent \w+')
+msg = 'Agent Alice gave secret doc to Agent Bob.'
+print(isName.findall(msg))
+print(isName.sub('REDACTED', msg))
+isName = re.compile('Agent (\w)\w*')
+print(isName.findall(msg))
+print(isName.sub(r'Agent \1***', msg))
+
+
+
+print("====verbose (for complex regex to format) -- check regex in code====")
+isName = re.compile(r'''
+(\d\d\d-) |      # area code w/o parens
+(\(\d\d\d\))    # area code w parens and no dash
+\d\d\d          # first 3 digits
+-               # second dash
+\d\d\d\d        # last four digits
+\sx\d{2,4}      # extension like x1234
+''', re.VERBOSE | re.IGNORECASE)
