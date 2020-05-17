@@ -47,6 +47,7 @@ def getInput(boardPlaces, key):
         print("8 for 'low-m'", end=" ")
     if !board['top-l']:
         print("9 for 'low-r'", end=" ")
+    
 
 board = {'top-l': 'o',
     'top-m': ' ',
