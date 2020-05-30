@@ -1,0 +1,12 @@
+
+to see django-admin subcommand
+$ django-admin
+
+to create project
+$ django-admin startproject <project_name>
+
+to start server
+$ python3 manage.py runserver
+
+to create app
+$ python3 manage.py startapp blog
