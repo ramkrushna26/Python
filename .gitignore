@@ -5,3 +5,4 @@ django/django_project/migrations/__pycache__/
 django/django_project/django_project/__pycache__/
 django/django_project/users/migrations/__pycache__/
 django/django_project/blog/__pycache__/
+django/django_project/blog/migrations/__pycache__/
