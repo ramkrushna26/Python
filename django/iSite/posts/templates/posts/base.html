@@ -18,14 +18,17 @@
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand mr-4" href="/">My Blog Site</a>
+        <a class="navbar-brand font-weight-bold mr-4" href="/">
+          <small class="text-muted">Welcome to </small>
+          My Blog Site
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Home</a>
-            <a class="nav-item nav-link mr-4" href="#">About</a>
+            <a class="nav-item nav-link" href="{% url 'posts-home' %}">Home</a>
+            <a class="nav-item nav-link mr-4" href="{% url 'posts-about' %}">About</a>
             <a class="btn btn-success" href="#">New Post</a>
           </div>
         </div>
