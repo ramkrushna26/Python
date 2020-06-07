@@ -7,3 +7,5 @@ django/django_project/users/migrations/__pycache__/
 django/django_project/blog/__pycache__/
 django/django_project/blog/migrations/__pycache__/
 django/iSite/iSite/__pycache__/
+django/iSite/posts/__pycache__/
+django/iSite/posts/migrations/__pycache__/
