@@ -8,16 +8,19 @@
     </h6>
   </div>
 </div>
+{% for post in post_s %}
 <article class="media content-section">
   <div class="media-body">
     <div class="article-metadata">
       <h4 class="text-info mr-2">
-        Gangadhar Patil <small class="mr-auto text-muted">Posted on 12-Dec-2020</small>
+        {{ post.author.firstname }}
+        <small class="mr-auto text-muted">{{ post.posted_on }}</small>
       </h4>
-      <h6 class="text-secondary mr-auto">Software Deveoper at Amazon</h6>      
+      <h6 class="text-secondary mr-auto">{{ post.author_description }}</h6>      
     </div>
-    <h3><a class="article-title text-dark" href="#">Blog Title</a></h3>
-    <p class="article-content">Content</p>
+    <h3><a class="article-title text-dark" href="#">{{ post.title }}</a></h3>
+    <p class="article-content">{{ post.content }}</p>
   </div>
 </article>
+{% endfor %}
 {% endblock %}
