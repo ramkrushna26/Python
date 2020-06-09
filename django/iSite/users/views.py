@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm, UserUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def register(request):
     if request.method == "POST":
@@ -9,9 +10,9 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            firstname = form.cleaned_data.get('firstname')
-            lastname = form.cleaned_data.get('lastname')
-            messages.success(request, f'Your account has been created. Please Login')
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            messages.success(request, f'Your account has been created!')
             return redirect('login')
     else:
         form = UserRegistrationForm()
