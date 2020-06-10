@@ -38,6 +38,8 @@ ul {
 
 .article-title {
   color: #444444;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 a.article-title:hover {
@@ -47,6 +49,8 @@ a.article-title:hover {
 
 .article-content {
   white-space: pre-line;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .article-img {

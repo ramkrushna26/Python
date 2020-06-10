@@ -4,7 +4,7 @@
   <div class="media-body">
     <div class="article-metadata">
       <h4 class="text-info mr-2">
-        {{ post.author }}
+        {{ post.author.first_name }} {{ post.author.last_name }}
         <small class="mr-auto text-muted">{{ post.posted_on }}</small>
         {% if object.author == user %}
           <a class="btn btn-danger btn-sm mt-1 mr-1 ml-1 mb-1 float-right" href="{% url 'posts-delete' object.id %}">Delete</a>
@@ -14,9 +14,9 @@
       <h6 class="text-secondary mr-auto">{{ post.author_description }}</h6>      
     </div>
     <h3>
-      <a class="article-title text-dark" href="#">{{ post.title }}</a>
+      <a class="article-title text-gray" href="#">{{ post.title }}</a>
     </h3>
-    <p class="article-content">{{ post.content }}</p>
+    <p class="article-content">{{ post.content|safe }}</p>
   </div>
 </article>
 {% endblock %}

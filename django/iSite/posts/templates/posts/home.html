@@ -18,8 +18,12 @@
       </h4>
       <h6 class="text-secondary mr-auto">{{ post.author_description }}</h6>      
     </div>
-    <h3><a class="article-title text-dark" href="{% url 'posts-detail' post.id %}">{{ post.title }}</a></h3>
-    <p class="article-content">{{ post.content }}</p>
+    <h3>
+      <a class="article-title text-gray" href="{% url 'posts-detail' post.id %}">
+        {{ post.title }}
+      </a>
+    </h3>
+    <p class="article-content">{{ post.content|safe }}</p>
   </div>
 </article>
 {% endfor %}
