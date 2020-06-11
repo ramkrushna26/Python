@@ -16,7 +16,12 @@
     <h3>
       <a class="article-title text-gray" href="#">{{ post.title }}</a>
     </h3>
-    <p class="article-content">{{ post.content|safe }}</p>
+    <p class="article-content">
+      {% if post.image %}
+        <img class="mx-auto d-block" src="{{ post.image.url }}">
+      {% endif %}
+      {{ post.content|safe }}
+    </p>
   </div>
 </article>
 {% endblock %}

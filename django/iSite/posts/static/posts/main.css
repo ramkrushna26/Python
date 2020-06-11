@@ -39,7 +39,6 @@ ul {
 .article-title {
   color: #444444;
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 a.article-title:hover {
@@ -49,7 +48,7 @@ a.article-title:hover {
 
 .article-content {
   white-space: pre-line;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
@@ -95,10 +94,12 @@ a.article-title:hover {
 }
 
 .introduction {
+  margin-right: 36px;
+  margin-left: 36px;
   padding-bottom: 16px;
   margin-top: 8px;
   margin-bottom: 24px;
-  border-bottom: 1px solid #e3e3e3
+  border-bottom: 1px solid #e3e3e3 
 }
 
 .text-muted {

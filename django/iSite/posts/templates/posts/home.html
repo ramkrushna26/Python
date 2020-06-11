@@ -3,9 +3,10 @@
 <div class="text-center">
   <img class="rounded-circle" src="media/default.png">
   <div>
-    <h6 class="introduction">
-      Hi.. I am Ramkrushna Bolewar and Welcome to my blog site.!  
-    </h6>
+    <p class="introduction">
+      Welcome to my blog site <br>
+      Hi... I am Ramkrushna and I am working as an Application Engineer in DBS, Hyderabad.
+    </p>
   </div>
 </div>
 {% for post in post_s %}
@@ -23,7 +24,12 @@
         {{ post.title }}
       </a>
     </h3>
-    <p class="article-content">{{ post.content|safe }}</p>
+    <p class="article-content">
+      {% if post.image %}
+        <img class="mx-auto d-block" src="{{ post.image.url }}">
+      {% endif %}
+      {{ post.content|safe }}
+    </p>
   </div>
 </article>
 {% endfor %}
