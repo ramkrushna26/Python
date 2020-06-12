@@ -122,3 +122,8 @@ a.article-title:hover {
   height: 2rem;
   padding-top: 5px;  
 }
+
+.comments-title {
+  border-bottom: 1px solid #e3e3e3
+}
+}

@@ -32,6 +32,10 @@
       {% endif %}
       {{ post.content|safe }}
     </p>
+    <hr>
+    <a class="text-center" href="{% url 'posts-detail' post.id %}">
+      Show Comments
+    </a>
   </div>
 </article>
 {% endfor %}

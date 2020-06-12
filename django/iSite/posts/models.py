@@ -28,3 +28,17 @@ class Post(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
     
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    commented_date = models.DateTimeField(default=timezone.now)
+    content = models.TextField()
+    comment_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.content
+
+    def commentApprove(self):
+        self.comment_approved = True
+        self.save()

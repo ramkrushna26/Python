@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -47,6 +47,24 @@ def postUpdate(request, pk):
     return render(request, 'posts/post_update.html', {'form': form, 'post': post})
 
 
+def addComment(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if request.POST:
+        form = CommentForm(request.POST or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.post = post
+            instance.save()
+            return redirect('posts-detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'posts/add_comment.html', {'form': form})
+
+
+def about(request):
+    return render(request, 'posts/about.html', {'title': 'about'})
+
+
 class UserPostsView(ListView):
     model = Post
     template_name = 'posts/user_posts.html'  # <app>/<model>_<view_type>.html
@@ -78,6 +96,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostDetailView(DetailView):
     model = Post
 
-
-def about(request):
-    return render(request, 'posts/about.html', {'title': 'about'})
