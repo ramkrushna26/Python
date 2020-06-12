@@ -11,3 +11,4 @@ django/iSite/posts/__pycache__/
 django/iSite/posts/migrations/__pycache__/
 django/iSite/users/__pycache__/
 django/iSite/users/migrations/__pycache__/
+django/iSite/media/

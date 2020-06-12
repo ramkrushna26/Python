@@ -1,20 +1,10 @@
 {% extends "posts/base.html" %}
 {% block content %}
-<div class="text-center">
-  <img class="rounded-circle" src="media/default.png">
-  <div>
-    <p class="introduction">
-      Welcome to my blog site <br>
-      Hi... I am Ramkrushna and I am working as an Application Engineer in DBS, Hyderabad.
-    </p>
-  </div>
-</div>
 {% for post in post_s %}
 <article class="media content-section">
   <div class="media-body">
     <div class="article-metadata">
       <h4 class="text-info mr-2">
-        <a href="{% url 'posts-user' post.author.username %}">
           {{ post.author.first_name }} {{ post.author.last_name }}
         </a>
         <small class="mr-auto text-muted">Posted On {{ post.posted_on }}</small>

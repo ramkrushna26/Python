@@ -2,6 +2,8 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+  min-height: 100%;
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -105,4 +107,18 @@ a.article-title:hover {
 .text-muted {
   font-size: 1rem;
   font-style: italic;
+}
+
+.sidebar {
+  position: fixed;
+  width: 300px;
+}
+
+.footer {
+  position: fixed;
+  color: #ffffff;
+  width: 100%;
+  bottom: 0px;
+  height: 2rem;
+  padding-top: 5px;  
 }

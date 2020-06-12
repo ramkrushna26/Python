@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
-from .forms import PostCreateForm
+from .forms import PostForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def home(request):
     context = {
@@ -15,7 +16,7 @@ def home(request):
 
 @login_required
 def postCreate(request):
-    form = PostCreateForm(request.POST or None, request.FILES or None)
+    form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.instance.author = request.user
         instance = form.save(commit=False)
@@ -25,27 +26,42 @@ def postCreate(request):
     return render(request, 'posts/post_form.html', {'form': form})
 
 
+@login_required
+def postUpdate(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if post.author != request.user:
+        messages.success(request, f'You are not authorized to update this post.')
+        return redirect(post.get_absolute_url())
+
+    if request.POST:
+        form = PostForm(request.POST or None, request.FILES or None, instance=post)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            messages.success(request, f'Post Updated')
+            return redirect(instance.get_absolute_url())
+        else:
+            form = PostForm(instance=post)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'posts/post_update.html', {'form': form, 'post': post})
+
+
+class UserPostsView(ListView):
+    model = Post
+    template_name = 'posts/user_posts.html'  # <app>/<model>_<view_type>.html
+    context_object_name = 'post_s'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-posted_on')
+
+
 class PostListView(ListView):
     model = Post
     template_name = "posts/home.html"
     context_object_name = 'post_s'
     ordering = ['-posted_on']
-
-
-
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Post
-    fields =  ['title', 'author_description', 'content']   
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
