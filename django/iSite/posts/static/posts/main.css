@@ -124,6 +124,12 @@ a.article-title:hover {
 }
 
 .comments-title {
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-bottom: 1px solid #e3e3e3
 }
+
+.comments {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

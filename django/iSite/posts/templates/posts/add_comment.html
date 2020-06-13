@@ -1,10 +1,14 @@
 {% extends 'posts/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <h2>New comment</h2>
-  <form method="POST" class="post-form">
+<form method="POST" class="post-form">
+  <fieldset class="form-group">
+    <legend class="border-bottom mb-4">Add New Comment</legend>
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="save btn btn-default">Comment</button>
-  </form>
+  </fieldset>
+  <div class="form-group">
+    <button type="submit" class="save btn btn-outline-info">Comment</button>
+  </div>
+</form>
 {% endblock %}

@@ -1,4 +1,5 @@
 {% extends "posts/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <article class="media content-section">
   <div class="media-body">
@@ -23,17 +24,21 @@
       {{ post.content|safe }}
     </p>
     <hr>
-    <h5 class="comment-title" >Comments</h5>
-    <a class="btn btn-default" href="{% url 'add-comment' post.id %}">Add comment</a>
-    {% for comment in post.comments.all %}
-      <div class="comment">
-        <div class="date">{{ comment.created_date }}</div>
-        <strong>{{ comment.author }}</strong>
-        <p>{{ comment.text|linebreaks }}</p>
-      </div>
-      {% empty %}
-        <p>No comments yet</p>
-    {% endfor %}
+    <h4 class="comment-title" >Comments</h4>
+    <a class="btn btn-default" href="{% url 'add-comment' post.id %}">Add Comment</a>
+      {% for comment in post.comments.all %}
+        {% if comment.comment_approved %}
+        <div class="comments">
+          <strong>
+            {{ comment.full_name }}
+            <small class="date text-muted ml-2">{{ comment.commented_date }}</small>
+          </strong>
+          <p>{{ comment.content|linebreaks }}</p>
+        {% endif %}
+        {% empty %}
+          <p></p>
+        </div>
+      {% endfor %}
   </div>
 </article>
 {% endblock %}

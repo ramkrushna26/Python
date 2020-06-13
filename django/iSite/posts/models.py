@@ -30,7 +30,8 @@ class Post(models.Model):
     
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=80)
+    email = models.EmailField(max_length=60)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     commented_date = models.DateTimeField(default=timezone.now)
     content = models.TextField()
@@ -39,6 +40,13 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
-    def commentApprove(self):
+    def comment_approve(self):
         self.comment_approved = True
         self.save()
+
+    class Meta:
+        ordering = ['-commented_date']
+
+
+def comment_approve(self):
+    return self.comments.filter(comment_approve=True)

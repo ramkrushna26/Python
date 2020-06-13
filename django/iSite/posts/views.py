@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -53,12 +53,29 @@ def addComment(request, pk):
         form = CommentForm(request.POST or None)
         if form.is_valid():
             instance = form.save(commit=False)
+            if request.user:
+                instance.full_name = request.user.first_name
+                instance.email = request.user.email
             instance.post = post
             instance.save()
             return redirect('posts-detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'posts/add_comment.html', {'form': form})
+
+
+@login_required
+def approveComment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.comment_approve()
+    return redirect('post_detail', pk=comment.post.pk)
+
+
+@login_required
+def removeComment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('post_detail', pk=comment.post.pk)
 
 
 def about(request):
@@ -95,4 +112,5 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostDetailView(DetailView):
     model = Post
+    ordering = ['-commented_on']
 
