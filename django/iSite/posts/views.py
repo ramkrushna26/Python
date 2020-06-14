@@ -64,15 +64,19 @@ def addComment(request, pk):
 @login_required
 def approveComment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
     comment.comment_approve()
-    return redirect('post_detail', pk=comment.post.pk)
+    messages.success(request, f'Comment Approved')
+    return redirect('posts-detail', pk=post_pk)
 
 
 @login_required
-def removeComment(request, pk):
+def deleteComment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
     comment.delete()
-    return redirect('post_detail', pk=comment.post.pk)
+    messages.success(request, f'Comment Deleted')
+    return redirect('posts-detail', pk=post_pk)
 
 
 def about(request):

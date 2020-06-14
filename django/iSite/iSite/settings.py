@@ -136,3 +136,6 @@ EMAIL_USE_TLS = True
 EMAIL_POST = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
+#logging out users after 6 hours of inactivity
+SESSION_COOKIE_AGE = 60 * 60 * 6

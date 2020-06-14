@@ -48,5 +48,5 @@ class Comment(models.Model):
         ordering = ['-commented_date']
 
 
-def comment_approve(self):
+def approvedComments(self):
     return self.comments.filter(comment_approve=True)
