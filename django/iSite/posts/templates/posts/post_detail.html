@@ -23,22 +23,25 @@
       {% endif %}
       {{ post.content|safe }}
     </p>
-    <hr>
-    <h4 class="comment-title" >Comments</h4>
-    <a class="btn btn-default" href="{% url 'add-comment' post.id %}">Add Comment</a>
-      {% for comment in post.comments.all %}
-        {% if comment.comment_approved %}
-        <div class="comments">
-          <strong>
-            {{ comment.full_name }}
-            <small class="date text-muted ml-2">{{ comment.commented_date }}</small>
-          </strong>
-          <p>{{ comment.content|linebreaks }}</p>
-        {% endif %}
-        {% empty %}
-          <p></p>
-        </div>
-      {% endfor %}
+    <div class="comment-section">
+      <h4 class="comment-title" >Comments</h4>
+      <a class="btn btn-default mb-2" href="{% url 'add-comment' post.id %}">Add Comment</a>
+      {% if post.comments.count > 0 %}
+        {% for comment in post.comments.all %}
+          {% if comment.comment_approved %}
+          <div class="comment">
+            <strong>
+              {{ comment.full_name }}
+              <small class="text-muted ml-2">{{ comment.commented_date }}</small>
+            </strong>
+            <p>{{ comment.content|linebreaks }}</p>
+          {% endif %}
+          {% empty %} 
+            <p>No Comments</p>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
   </div>
 </article>
 {% endblock %}

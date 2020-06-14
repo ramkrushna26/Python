@@ -53,9 +53,6 @@ def addComment(request, pk):
         form = CommentForm(request.POST or None)
         if form.is_valid():
             instance = form.save(commit=False)
-            if request.user:
-                instance.full_name = request.user.first_name
-                instance.email = request.user.email
             instance.post = post
             instance.save()
             return redirect('posts-detail', pk=post.pk)
