@@ -61,19 +61,19 @@
       <div class="col-md-4">
         <div class="content-section">
           <h3>Latest Posts</h3>
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">under construction</li>
-              <li class="list-group-item list-group-item-light">Announcements</li>
-            </ul>
+          <ul class="list-group">
+            {% load posts_tags %}
+            {% recent_posts %}
+          </ul>
           </p>
         </div>
         <div class="content-section">
           <h3>RSS Feed</h3>
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Feed</li>
-              <li class="list-group-item list-group-item-light">Announcements</li>
-              <li class="list-group-item list-group-item-light">Interesting content</li>
-            </ul>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-light">Feed</li>
+            <li class="list-group-item list-group-item-light">Announcements</li>
+            <li class="list-group-item list-group-item-light">Under Construction</li>
+          </ul>
           </p>
         </div>
       </div>

@@ -27,7 +27,7 @@ class Post(models.Model):
             output_size = (650, 750)
             img.thumbnail(output_size)
             img.save(self.image.path)
-    
+
 
 class Comment(models.Model):
     full_name = models.CharField(max_length=80)
@@ -35,18 +35,14 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     commented_date = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-    comment_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.content
-
-    def comment_approve(self):
-        self.comment_approved = True
-        self.save()
 
     class Meta:
         ordering = ['-commented_date']
 
 
-def approvedComments(self):
-    return self.comments.filter(comment_approve=True)
+
+
+

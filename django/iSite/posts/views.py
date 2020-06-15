@@ -60,7 +60,7 @@ def addComment(request, pk):
         form = CommentForm()
     return render(request, 'posts/add_comment.html', {'form': form})
 
-
+"""
 @login_required
 def approveComment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -68,7 +68,7 @@ def approveComment(request, pk):
     comment.comment_approve()
     messages.success(request, f'Comment Approved')
     return redirect('posts-detail', pk=post_pk)
-
+"""
 
 @login_required
 def deleteComment(request, pk):

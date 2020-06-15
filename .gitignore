@@ -13,3 +13,4 @@ django/iSite/users/__pycache__/
 django/iSite/users/migrations/__pycache__/
 django/iSite/media/posts/*
 django/iSite/media/default.png
+django/iSite/posts/templatetags/__pycache__/
