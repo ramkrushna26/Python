@@ -1,4 +1,5 @@
 {% load static %}
+{% load posts_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,17 +63,14 @@
         <div class="content-section">
           <h3>Latest Posts</h3>
           <ul class="list-group">
-            {% load posts_tags %}
             {% recent_posts %}
           </ul>
           </p>
         </div>
         <div class="content-section">
-          <h3>RSS Feed</h3>
+          <h3>Medium Feed</h3>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-light">Feed</li>
-            <li class="list-group-item list-group-item-light">Announcements</li>
-            <li class="list-group-item list-group-item-light">Under Construction</li>
+            {% rss_medium %}
           </ul>
           </p>
         </div>
