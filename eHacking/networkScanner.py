@@ -42,6 +42,7 @@ def printClients(clientList):
 	for client in clientList:
 		print(client["IP"] + "\t\t" + client["MAC"])
 
+
 option = getArgs()
 scannedResult = scan(option.target)
 printClients(scannedResult)
