@@ -2,7 +2,7 @@
 
 import scapy.all as scapy
 import time
-
+import sys
 # to get all field 
 # scapy.ls(scapy.ARP)
 
@@ -12,6 +12,7 @@ def getMAC(ip):
 	arpRequestBroadcast = broadcast/arpRequest
 
 	answered = scapy.srp(arpRequestBroadcast, timeout=1, verbose=False)[0]
+	print(answered.show())
 	return answered[0][1].hwsrc
 
 
