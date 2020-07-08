@@ -21,7 +21,6 @@ def setLoad(packet, load):
 	del packet[scapy.TCP].chksum
 	return packet
 
-
 def processPacket(packet):
 	scapyPacket = scapy.IP(packet.get_payload())
 	if scapyPacket.haslayer(scapy.Raw):
@@ -37,7 +36,6 @@ def processPacket(packet):
 				packet.set_payload(str(modifiedPacket))
 
 	packet.accept()
-
 
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(0, processPacket)

