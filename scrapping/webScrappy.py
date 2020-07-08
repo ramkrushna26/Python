@@ -41,7 +41,7 @@ for record in table:
         quote['author'] = row.img['alt'].split(" #")[1]
         quotes.append(quote)
 
-filename = "/home/ram/Test/inspirationalQuotes.csv"
+filename = os.environ.get("HOME") + "/Test/inspirationalQuotes.csv"
 with open(filename, 'w') as f:
     w = csv.DictWriter(f, ['theme', 'url', 'img', 'lines', 'author'])
     w.writeheader()
