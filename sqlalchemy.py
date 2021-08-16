@@ -1,3 +1,4 @@
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
@@ -34,3 +35,21 @@ class Task(Base):
   
 
 Base.metadata.create_all(engine)
+
+# Creating session to play with database
+session_maker = sessionmaker()
+session_maker.configure(bind=engine)
+session = session_maker()
+
+# inserting into table
+ram_project = Project(title='Ram', description='The Lord')
+session.add(ram_project)
+session.commit()
+tasks = [Task(project_id=ram_project.project_id, description='ram-seeta tasks'), Task(project_id=ram_project.project_id, description='ram-laxman tasks')]
+session.bulk_save_objects(tasks)
+session.commit()
+
+# querying database
+obj = session.query(Project).filter_by(title='Ram').first()
+print(obj)
+
