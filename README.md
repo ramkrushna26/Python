@@ -1,7 +1,7 @@
 ## Python Code Snippets ##
 
-#### This Repository contains ####
+#### This Repository contains: ####
 
 * Refer product.py for details.
 * for requests refer : requests.readtherequests
-* Web Scrapping
+* [Ethical Hacking](https://github.com/ramkrushna26/python-codes/tree/master/eHacking)
