@@ -1,8 +1,6 @@
 ## Python Code Snippets ##
 
-----
-
-### This Repository contains ###
+#### This Repository contains ####
 
 * Refer product.py for details.
 * for requests refer : requests.readtherequests
