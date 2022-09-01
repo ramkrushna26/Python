@@ -39,8 +39,11 @@ if __name__ == "__main__":
             push(item)
             print("Current Stack: ", stack)
         elif action == 2:
-            print("Stack after Pop: ", stack)
-            print("Popped Item: ", pop())
+            if is_empty():
+                print("Error: Stack is Empty.")
+            else:
+                print("Stack after Pop: ", stack)
+                print("Popped Item: ", pop())
         elif action == 3:
             print("Size of Stack: ", size())
         elif action == 4:
@@ -50,3 +53,6 @@ if __name__ == "__main__":
         else:
             print("Invalid Input. Try Again!")
 
+
+            
+        
