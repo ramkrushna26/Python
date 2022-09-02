@@ -1,27 +1,33 @@
 
 
-stack = []
+class Stack:
+    def __init__(self):
+        self.elements = []
 
-def push(item):
-    stack.append(item)
+    def push(self, item):
+        self.elements.append(item)
 
-def pop():
-    item = stack[-1]
-    del stack[-1]
-    return item
+    def pop(self):
+        item = self.elements[-1]
+        del self.elements[-1]
+        return item
 
-def size():
-    return len(stack)
+    def size(self):
+        return len(self.elements)
 
-def is_empty():
-    return len(stack) == 0
+    def is_empty(self):
+        return len(self.elements) == 0
 
-def top():
-    return stack[-1]
+    def top(self):
+        return self.elements[-1]
 
+    def get_stack(self):
+        return self.elements
 
 if __name__ == "__main__":
     action_flag = 1
+    stack = Stack()
+    
     while(1):
         try:
             if action_flag == 1:
@@ -36,23 +42,22 @@ if __name__ == "__main__":
         
         if action == 1:
             item = input("Enter item to Push: ")
-            push(item)
-            print("Current Stack: ", stack)
+            stack.push(item)
+            print("Current Stack: ", stack.get_stack())
         elif action == 2:
-            if is_empty():
+            if stack.is_empty():
                 print("Error: Stack is Empty.")
             else:
-                print("Stack after Pop: ", stack)
-                print("Popped Item: ", pop())
+                print("Popped Item: ", stack.pop())
+                print("Stack after Pop: ", stack.get_stack())
         elif action == 3:
-            print("Size of Stack: ", size())
+            print("Size of Stack: ", stack.size())
         elif action == 4:
-            print("Stack empty check: ", is_empty())
+            print("Stack empty check: ", stack.is_empty())
         elif action == 5:
-            print("Top item in Stack: ", top())
+            print("Top item in Stack: ", stack.top())
         else:
             print("Invalid Input. Try Again!")
 
 
             
-        
