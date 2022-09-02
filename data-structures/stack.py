@@ -42,8 +42,9 @@ if __name__ == "__main__":
         
         if action == 1:
             item = input("Enter item to Push: ")
-            stack.push(item)
-            print("Current Stack: ", stack.get_stack())
+            if item:
+                stack.push(item)
+                print("Current Stack: ", stack.get_stack())
         elif action == 2:
             if stack.is_empty():
                 print("Error: Stack is Empty.")
