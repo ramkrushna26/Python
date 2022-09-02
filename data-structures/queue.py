@@ -1,26 +1,32 @@
 
 
-queue = []
+class Queue:
+    def __init__(self):
+        self.elements = []
 
-def enqueue(item):
-    queue.append(item)
+    def enqueue(self,item):
+        self.elements.append(item)
 
-def dequeue():
-    item = queue.pop(0)
-    return item
+    def dequeue(self):
+        item = self.elements.pop(0)
+        return item
 
-def size():
-    return len(queue)
+    def size(self):
+        return len(self.elements)
 
-def is_empty():
-    return len(queue) == 0
+    def is_empty(self):
+        return len(self.elements) == 0
 
-def front():
-    return queue[-1]
+    def front(self):
+        return self.elements[-1]
 
+    def get_queue(self):
+        return self.elements
 
 if __name__ == "__main__":
     action_flag = 1
+    queue = Queue()
+    
     while(1):
         try:
             if action_flag == 1:
@@ -35,21 +41,21 @@ if __name__ == "__main__":
         
         if action == 1:
             item = input("Enter item to Enqueue: ")
-            enqueue(item)
-            print("Current Queue: ", queue)
+            if item:
+                queue.enqueue(item)
+                print("Current Queue: ", queue.get_queue())
         elif action == 2:
-            if is_empty():
+            if queue.is_empty():
                 print("Error: Queue is Empty.")
             else:
-                print("Queue after Dequeue: ", queue)
-                print("Dequeue Item: ", dequeue())
+                print("Dequeue Item: ", queue.dequeue())
+                print("Queue after Dequeue: ", queue.get_queue())
         elif action == 3:
-            print("Size of Queue: ", size())
+            print("Size of Queue: ", queue.size())
         elif action == 4:
-            print("Queue empty check: ", is_empty())
+            print("Queue empty check: ", queue.is_empty())
         elif action == 5:
-            print("Front item in Queue: ", front())
+            print("Front item in Queue: ", queue.front())
         else:
             print("Invalid Input. Try Again!")
-
 
