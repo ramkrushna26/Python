@@ -1,4 +1,4 @@
-## Python Codes
+## Python
 
 * Refer product.py for details.
 * for requests refer : requests.readtherequests
