@@ -1,13 +1,13 @@
 ## Python Interview Preparation
 
-#### Diff between sort and sorted functions
+#### sort() v sorted()
 
-##### sort()  
+* sort()  
 Modifies the original list: It directly alters the original list in-place.  
 Returns None: It doesn't return a new sorted list.  
 Syntax: my_list.sort()
   
-##### sorted()
+* sorted()
 Creates a new sorted list: It returns a new sorted list without modifying the original list.  
 Returns a new list: It returns the newly created sorted list.  
 Syntax: new_list = sorted(my_list)  
